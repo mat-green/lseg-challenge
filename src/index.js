@@ -7,6 +7,7 @@ const Enrichment = require('./enrichment.js');
 const FileResource = require('./file_resource.js');
 const Parser = require('./parser.js');
 
+const logger = require('./logger.js');
 const pkg = require('../package.json');
 
 const program = new Command();
@@ -36,7 +37,16 @@ program
         result[pid] = record;
       }
     }
-    console.debug(result);
-    // Analyse data.
+
+    // Analyse data and report long running processes.
+    const fiveMinutes = 1000 * 60 * 5; // microsecond x seconds x minutes
+    const tenMinutes = 1000 * 60 * 10;
+    for (const key of Object.keys(result)) {
+      if(result[key]['duration'] > tenMinutes) {
+        logger.error(`${result[key]['description']} took longer than 10 minutes`)
+      } else if(result[key]['duration'] > fiveMinutes) {
+        logger.warn(`${result[key]['description']} took longer than 5 minutes`)
+      }
+    }
   });
 program.parse(process.argv);

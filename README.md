@@ -27,3 +27,8 @@ Within the same folder as this README file execute the following:
 npm install
 npm test
 ```
+
+## TODO
+
+- Add a formatted report of long running processes
+- Add documentation to classes to define their scope of responsibility.
