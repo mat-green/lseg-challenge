@@ -1,0 +1,25 @@
+{
+  "name": "lseg-challenge",
+  "version": "1.0.0",
+  "description": "Command line log file analyser",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mat-green/lseg-challenge.git"
+  },
+  "author": "Matthew Green",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mat-green/lseg-challenge/issues"
+  },
+  "homepage": "https://github.com/mat-green/lseg-challenge#readme",
+  "bin": {
+    "lseg": "./src/index.js"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
