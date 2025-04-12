@@ -19,3 +19,11 @@ npm install
 npm link
 lseg analyse ./logs\[35\].log
 ```
+
+## Test Execution
+
+Within the same folder as this README file execute the following:
+```bash
+npm install
+npm test
+```
