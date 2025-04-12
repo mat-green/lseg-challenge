@@ -3,6 +3,7 @@
 'use strict';
 
 const { Command } = require('commander');
+const Enrichment = require('./enrichment.js');
 const FileResource = require('./file_resource.js');
 const Parser = require('./parser.js');
 
@@ -18,14 +19,24 @@ program
   .action(function (filepath) {
     // Parse the CSV log file.
     const input = new FileResource(filepath);
+    const result = {};
     for (const line of input.get()) {
       const parser = new Parser(line);
       parser.execute();
-      const result = parser.getResult();
-      console.debug(result);
+      const data = parser.getResult();
+      if(undefined == result[data['pid']]) {
+        const enricher = new Enrichment(data);
+        enricher.execute()
+        const [pid, record] = enricher.getResult();
+        result[pid] = record;
+      } else {
+        const enricher = new Enrichment(data, result[data['pid']]);
+        enricher.execute()
+        const [pid, record] = enricher.getResult();
+        result[pid] = record;
+      }
     }
-    // Identify each job or task and track its start and finish times.
-    // Calculate the duration of each job from the time it started to the time it finished.
+    console.debug(result);
     // Analyse data.
   });
 program.parse(process.argv);
