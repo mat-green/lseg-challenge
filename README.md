@@ -32,3 +32,7 @@ npm test
 
 - Add a formatted report of long running processes
 - Add documentation to classes to define their scope of responsibility.
+
+[git]: http://git-scm.com/
+[node]: https://nodejs.org/
+[npm]: https://www.npmjs.com/
